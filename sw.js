@@ -23,31 +23,25 @@ var APP_PREFIX = "HelloWorld"; // Identifier for this app (this needs to be cons
 var VERSION = "version_0.1"; // Version of the off-line cache (change this value everytime you want to update cache)
 var CACHE_NAME = APP_PREFIX + VERSION;
 const files = ["index.html", "css/style.css", "js/main.js"];
-let place = location.pathname.split("/")[0];
-place =
-  place === ""
-    ? ""
-    : location.href.substring(0, location.href.lastIndexOf("/"));
-
-console.warn(location.href.substring(0, location.href.lastIndexOf("/")));
-console.warn(place);
+const place = location.port === "3000" ? "/" : "/hello-pwa/";
 var URLS = files.map(function (item) {
-  return place + "/" + item;
+  return place + item;
 });
-console.log(URLS);
+console.warn(URLS);
+console.warn();
 
 // Respond with cached resources
 self.addEventListener("fetch", function (e) {
-  console.log("fetch request : " + e.request.url);
+  // console.log("fetch request : " + e.request.url);
   e.respondWith(
     caches.match(e.request).then(function (request) {
       if (request) {
         // if cache is available, respond with cache
-        console.log("responding with cache : " + e.request.url);
+        // console.log("responding with cache : " + e.request.url);
         return request;
       } else {
         // if there are no cache, try fetching request
-        console.log("file is not cached, fetching : " + e.request.url);
+        // console.log("file is not cached, fetching : " + e.request.url);
         return fetch(e.request);
       }
 
@@ -61,7 +55,7 @@ self.addEventListener("fetch", function (e) {
 self.addEventListener("install", function (e) {
   e.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
-      console.log("installing cache : " + CACHE_NAME);
+      // console.log("installing cache : " + CACHE_NAME);
       return cache.addAll(URLS);
     })
   );
@@ -82,7 +76,7 @@ self.addEventListener("activate", function (e) {
       return Promise.all(
         keyList.map(function (key, i) {
           if (cacheWhitelist.indexOf(key) === -1) {
-            console.log("deleting cache : " + keyList[i]);
+            // console.log("deleting cache : " + keyList[i]);
             return caches.delete(keyList[i]);
           }
         })
