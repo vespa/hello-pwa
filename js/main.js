@@ -4,6 +4,8 @@ window.onload = () => {
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js");
   }
+
+  // ADD to home events
   let deferredPrompt;
   setTimeout(function () {}, 100);
   const addBtn = document.querySelector(".add-button");
