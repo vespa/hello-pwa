@@ -23,7 +23,7 @@ var APP_PREFIX = "HelloWorld"; // Identifier for this app (this needs to be cons
 var VERSION = "version_0.1"; // Version of the off-line cache (change this value everytime you want to update cache)
 var CACHE_NAME = APP_PREFIX + VERSION;
 const files = ["index.html", "css/style.css", "js/main.js"];
-const place = location.port === "3000" ? "/" : "/hello-pwa/";
+const place = location.port === "9000" ? "/" : "/hello-pwa/";
 var URLS = files.map(function (item) {
   return place + item;
 });
