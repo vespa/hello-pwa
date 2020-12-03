@@ -20,16 +20,13 @@
 // });
 
 var APP_PREFIX = "HelloWorld"; // Identifier for this app (this needs to be consistent across every cache update)
-var VERSION = "version_0.3"; // Version of the off-line cache (change this value everytime you want to update cache)
+var VERSION = "version_0.5"; // Version of the off-line cache (change this value everytime you want to update cache)
 var CACHE_NAME = APP_PREFIX + VERSION;
-const files = ["index.html", "css/style.css", "js/main.js"];
+const files = ["css/style.css", "js/main.js"];
 const place = location.port === "9000" ? "/" : "/hello-pwa/";
 var URLS = files.map(function (item) {
   return place + item;
 });
-console.warn(URLS);
-console.warn();
-
 // Respond with cached resources
 self.addEventListener("fetch", function (e) {
   // console.log("fetch request : " + e.request.url);
